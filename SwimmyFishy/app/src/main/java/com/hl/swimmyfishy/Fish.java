@@ -80,11 +80,11 @@ public class Fish implements GameObject {
         Animation flapAnimation = new Animation(flapAnim,0.2f);
         animationManager = new AnimationManager(flapAnimation);
 
-//        /* Paint for rectangle drawn around fish for debugging */
-//        paint = new Paint();
-//        paint.setColor(Color.GREEN);
-//        paint.setStrokeWidth(10);
-//        paint.setStyle(Paint.Style.STROKE);
+        /* Paint for rectangle drawn around fish for debugging */
+        paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setStrokeWidth(10);
+        paint.setStyle(Paint.Style.STROKE);
     }
 
 
@@ -102,7 +102,7 @@ public class Fish implements GameObject {
                 if (!isPowerUp) {
                     if (this.state == SHIELD){
                         this.state = ALIVE;
-                        paint.setColor(Color.GREEN);
+//                        paint.setColor(Color.GREEN);
                         hb.setFirstIntersect(false);
                     }
                     else if(hb.firstIntersect()){
@@ -112,7 +112,6 @@ public class Fish implements GameObject {
                 else{
                     /* TODO */
                     this.state = SHIELD;
-                    paint.setColor(Color.WHITE);
                 }
             }
         }
@@ -195,8 +194,10 @@ public class Fish implements GameObject {
 
         animationManager.draw(canvas,matrix);
 
-        /* Draw the hit-box for debugging */
-//        canvas.drawRect(this.x,this.y,this.x+spriteWidth,this.y+spriteHeight,paint);
+        /* Draw shield hit-box */
+        if (state == SHIELD) {
+            canvas.drawRect(this.x,this.y,this.x+spriteWidth,this.y+spriteHeight,paint);
+        }
     }
 
     @Override
